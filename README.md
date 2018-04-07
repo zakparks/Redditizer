@@ -1,10 +1,10 @@
 # Redditizer
 A discord bot that parses and links to Subreddits
 
-![example](https://imgur.com/sUBokwO)
+![example](https://i.imgur.com/sUBokwO.png)
 
 ## About
-This is a bot for Discord written in C# .NET 4.6.1, using the [RedditSharp](https://github.com/CrustyJew/RedditSharp) and [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus) libraries for the Reddit and Discord APIs, respectively. Once this bot is set up, running, and added to your discord server, it will passively read comments and if they contain a subreddit (ex /r/aww or r/news), it will parse that out and send an Embed with a link to that subreddit and it's description and the [top 3 posts](https://imgur.com/HjIHDtk) if you choose.
+This is a bot for Discord written in C# .NET 4.6.1, using the [RedditSharp](https://github.com/CrustyJew/RedditSharp) and [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus) libraries for the Reddit and Discord APIs, respectively. Once this bot is set up, running, and added to your discord server, it will passively read comments and if they contain a subreddit (ex /r/aww or r/news), it will parse that out and send an Embed with a link to that subreddit and it's description and the [top 3 posts](https://i.imgur.com/HjIHDtk.png) if you choose.
 
 ## Usage
 Type any subreddit in either by itself or in a sentence, and the bot will detect it. If you want to also display that subreddit's top 3 posts of all time, you can add a flag `-t`, `-top`, or `-top3` to also have the bot print out those posts. 
@@ -29,4 +29,4 @@ Configure the bot to connect to your Discord Server (taken/modified from the [DS
 10. On the [page](http://i.imgur.com/QeH0o5S.png), select **your server** (1), and press **authorize** (2).
 11. [Done](http://i.imgur.com/LF1gpm2.png)! 
 
-After the requisite data is in the config file, and you have a bot registered with Reddit and Discord, you can run the Redditizer.exe (or run from the VS Debugger). You should see the [console window open](https://imgur.com/8hL35JQ) with sucessful messages connecting to reddit, initalizing Discord, and a heartbeat. 
+After the requisite data is in the config file, and you have a bot registered with Reddit and Discord, you can run the Redditizer.exe (or run from the VS Debugger). You should see the [console window open](https://i.imgur.com/8hL35JQ.png) with sucessful messages connecting to reddit, initalizing Discord, and a heartbeat. 
