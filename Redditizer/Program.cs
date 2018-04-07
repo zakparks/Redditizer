@@ -11,11 +11,15 @@ using System.IO;
 using Newtonsoft.Json;
 using DSharpPlus.Entities;
 using System.Diagnostics.Contracts;
+using System.Collections.Specialized;
 
 namespace Redditizer
 {
     class Program
     {
+        // app settings
+        public static NameValueCollection appSettings;
+
         // reddit login information
         public static BotWebAgent WebAgent;
         public static Reddit RedditInstance;
@@ -28,6 +32,7 @@ namespace Redditizer
         static void Main(string[] args)
         {
             var prog = new Program();
+            appSettings = ConfigurationManager.AppSettings;
             prog.RunBotAsync().GetAwaiter().GetResult();
         }
 
@@ -37,23 +42,17 @@ namespace Redditizer
             Contract.Ensures(Contract.Result<Task>() != null);
             try
             {
-                // set up or load a discord json configuration
-                string json = "";
-                using (FileStream fs = File.OpenRead("config.json"))
-                using (StreamReader sr = new StreamReader(fs, new UTF8Encoding(false)))
-                    json = await sr.ReadToEndAsync();
-
-                ConfigJson cfgjson = JsonConvert.DeserializeObject<ConfigJson>(json);
+                // setup discord configuration
                 DiscordConfiguration cfg = new DiscordConfiguration
                 {
-                    Token = cfgjson.Token,
+                    Token = appSettings["DiscordToken"],
                     TokenType = TokenType.Bot,
                     AutoReconnect = true,
                     LogLevel = LogLevel.Debug,
                     UseInternalLogHandler = true
                 };
 
-                // then we want to instantiate our client
+                // instantiate the client
                 Client = new DiscordClient(cfg);
 
                 // Hook into client events, so we know what's going on
@@ -69,7 +68,7 @@ namespace Redditizer
             try
             {
                 // set up the reddit user account using OAuth
-                var appSettings = ConfigurationManager.AppSettings;
+                
                 string username = appSettings["RedditUsername"] ?? null;
                 string pwd = appSettings["RedditPassword"] ?? null;
                 if (username == null || pwd == null) { throw new Exception("Username or password was null in Redditizer.exe.config."); }
@@ -227,14 +226,5 @@ namespace Redditizer
             // return the block of text to be printed out by the bot in chat
             return embedBuilder.Build();
         }
-    }
-
-    /// <summary>
-    /// Structure to hold data from config.json
-    /// </summary>
-    public struct ConfigJson
-    {
-        [JsonProperty("token")]
-        public string Token { get; private set; }
     }
 }
